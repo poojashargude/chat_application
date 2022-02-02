@@ -3,9 +3,8 @@ import { useHistory } from "react-router-dom";
 import MessagesContext from "../context/messagesContext/messagesContext";
 
 function UserLogin(props) {
-  //let history = useHistory();
-
   let history = useHistory();
+
   const { logout } = useContext(MessagesContext);
   const [user, setUser] = useState({ phone_number: "" });
   const { phone_number } = user;

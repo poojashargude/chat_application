@@ -9,7 +9,8 @@ module.exports = {
           Bblack:"#111117",
           Agray:"#2a2f32",
           Hgray:"#323739",
-          Tgray:"#33383b"
+          Tgray:"#33383b",
+          Newc:"#128C7E"
         },
         fonts:{
 

@@ -51,19 +51,28 @@ function AdminLogin(props) {
   }, [props.history, admin_auth]);
 
   return (
-    <div className=" w-full h-screen align-middle bg-brand-Bblack">
-      <nav className="w-full h-80 bg-brand-Ggreen"></nav>
+    <div className="flex flex-col w-full h-screen">
+    <div className=" w-full align-middle bg-brand-Bblack h-full">
+      <nav className="w-full h-1/3 bg-brand-Newc"></nav>
       <div class="w-full flex justify-center">
-        <form class="bg-white shadow-md px-8 pt-6 pb-8 mb-4 -mt-32 w-6/12 fixed">
+        <form class="bg-white shadow-md p-6 mb-4  fixed rounded-lg md:w-2/6 w-5/6 -mt-36">
+        <div className="flex flex-row justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
+        </div>
+        <div className="flex flex-row justify-center">
+        <span className="text-3xl font-bold ml-3">Admin Login</span>
+        </div>
           <div class="mb-4">
             <label
-              class="block text-brand-Bblack text-sm font-bold mb-2 md:mt-16"
+              class="block text-brand-Bblack text-xl font-bold mb-2 md:mt-5"
               for="username"
             >
-              Username
+             Mobile Number
             </label>
             <input
-              class="shadow appearance-none rounded w-full py-2 px-3 text-brand-Bblack leading-tight focus:outline-none focus:shadow-outline border-2 border-brand-Ggreen"
+              class="shadow appearance-none rounded w-full py-2 px-3 text-brand-Bblack leading-tight focus:outline-none focus:shadow-outline border-2 border-brand-Newc"
               id="username"
               type="text"
               name="phone_number"
@@ -74,13 +83,14 @@ function AdminLogin(props) {
           </div>
           <div class="mb-6">
             <label
-              class="block text-brand-Bblack text-sm font-bold mb-2"
+              class="block text-brand-Bblack text-xl font-bold mb-2"
               for="password"
             >
               Password
             </label>
+            
             <input
-              class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline border-2 border-brand-Ggreen"
+              class="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline border-2 border-brand-Newc"
               id="password"
               type="password"
               name="password"
@@ -88,33 +98,40 @@ function AdminLogin(props) {
               onChange={handleChange}
               placeholder="******************"
             ></input>
+            <a
+              class="inline-block align-baseline font-bold text-brand-Bblack hover:text-blue-800 float-right mb-6 "
+              href="http://localhost:3000/fp"
+            >
+              Forgot Password?
+            </a>
           </div>
-          <div class="flex items-center justify-between">
+          <div class=" items-center">
             <button
-              class="hover:bg-blue-700 hover:text-white text-brand-Bblack font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline md:mb-16 bg-brand-Ggreen"
+              class="hover:bg-blue-700 hover:text-white text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline md:mb-6 bg-brand-Newc w-full text-xl"
               type="button"
               onClick={submit}
             >
               Log In
             </button>
-            <button
+            {/* <button
               class="hover:bg-blue-700 hover:text-white text-brand-Bblack font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline md:mb-16 bg-brand-Ggreen"
               type="button"
               onClick={() => onLogout()}
             >
               Log Out
-            </button>
-            <a
+            </button> */}
+            
+          </div>
+          {/* <a
               class="inline-block align-baseline font-bold text-sm text-brand-Bblack hover:text-blue-800 md:mb-16"
               href="#"
             >
               Forgot Password?
-            </a>
-          </div>
+            </a> */}
           {admin_login_error &&
             admin_login_error.error.map((err) => (
               <div
-                class="relative py-3 pl-4 pr-10 mt-3 leading-normal text-red-700 bg-white rounded-lg"
+                class="relative py-2 pl-4 pr-10 mt-2 leading-normal text-red-700 bg-white rounded-lg border-2 border-red-700"
                 role="alert"
               >
                 <p>{err.msg}</p>
@@ -162,6 +179,7 @@ function AdminLogin(props) {
           )}
         </form>
       </div>
+    </div>
     </div>
   );
 }

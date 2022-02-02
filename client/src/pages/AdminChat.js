@@ -59,11 +59,8 @@ function AdminChat() {
         <div className="h-full border-b border-gray-600 bg-brand-Agray">
           <nav className=" w-full h-20 border-b border-gray-600">
             <div className="flex flex-row">
-              <img
-                className=" h-16 w-15 p-2 ml-6 pt-3"
-                src="/Photos/user.png"
-              />
-              <span className="text-white p-2 font-bold md:text-2xl text-xl">
+              <img className=" h-16 w-15 p-2 mt-2" src="/Photos/user.png" />
+              <span className="text-white p-2 font-bold md:text-2xl text-xl mt-4">
                 {data}
               </span>
             </div>
@@ -72,7 +69,7 @@ function AdminChat() {
           <div class="container flex mx-auto w-full border-b border-gray-600">
             <input
               type="text"
-              class="px-4 py-2  rounded-full outline-none w-full m-8 bg-brand-Tgray"
+              class="  rounded-full outline-none w-full m-8 bg-brand-Tgray"
               placeholder="Search or Start New Chat "
             />
           </div>

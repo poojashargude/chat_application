@@ -106,7 +106,7 @@ function AdminLogin(props) {
             </button>
             <a
               class="inline-block align-baseline font-bold text-sm text-brand-Bblack hover:text-blue-800 md:mb-16"
-              href="#"
+              href="/forgotpassword"
             >
               Forgot Password?
             </a>

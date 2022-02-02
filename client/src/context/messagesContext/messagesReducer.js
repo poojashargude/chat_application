@@ -12,6 +12,8 @@ import {
   LOGOUT,
   ADMIN_REPLY_SUCCESS,
   ADMIN_REPLY_ERROR,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_ERROR,
 } from "../../types";
 
 export default (state, action) => {
@@ -30,6 +32,16 @@ export default (state, action) => {
       return {
         ...state,
         admin_login_error: action.payload,
+      };
+    case FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        forgot_password_success: action.payload,
+      };
+    case FORGOT_PASSWORD_ERROR:
+      return {
+        ...state,
+        forgot_password_error: action.payload,
       };
 
     case GET_ADMIN_MESSAGES_SUCCESS:
@@ -92,12 +104,14 @@ export default (state, action) => {
       return {
         ...state,
         admin_login_error: null,
+        forgot_password_error: null,
       };
 
     case CLEAR_INFO:
       return {
         ...state,
         admin_login_success: null,
+        forgot_password_success: null,
       };
     case LOGOUT:
       localStorage.removeItem("token");

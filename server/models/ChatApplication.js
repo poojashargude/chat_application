@@ -36,8 +36,6 @@ const ChatApplicationSchema = new mongoose.Schema({
   ],
 });
 
-/*chat:[{message:{
 
-}}]*/
 
 module.exports = mongoose.model("ChatApplication", ChatApplicationSchema);

@@ -6,6 +6,7 @@ import AdminLogin from "./pages/AdminLogin";
 import UserLogin from "./pages/UserLogin";
 import UserChat from "./pages/UserChat";
 import AdminChat from "./pages/AdminChat";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route exact path="/adminchat" component={AdminChat} />
             <Route exact path="/user" component={UserLogin} />
             <Route exact path="/userchat" component={UserChat} />
+            <Route exact path="/forgotpassword" component={ForgotPassword} />
           </Switch>
         </Router>
       </MessagesState>

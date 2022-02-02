@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const sgMail = require("@sendgrid/mail");
 const ChatApplication = require("../models/ChatApplication");
 const MessagesSchema = require("../models/Messages");
 const { findOneAndUpdate } = require("../models/Messages");
@@ -117,6 +117,59 @@ router.post(
         );
       } catch (err) {
         console.error(err.message);
+        res.status(500).send("Server Error");
+      }
+    }
+  }
+);
+
+//forgot password
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+router.post(
+  "/forgotPassword",
+  [check("email_address", "Please provide a valid email").isEmail()],
+  async (req, res) => {
+    //console.log(req.body);
+    const { email_address } = req.body;
+
+    const errors = validationResult(req);
+    //console.log(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    } else {
+      let user = await ChatApplication.findOne({ email_address });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ error: [{ msg: "E-mail address is invalid" }] });
+      }
+      var passwordId = Math.random().toString(36).slice(-8);
+      randomNumber = passwordId;
+      console.log(randomNumber);
+
+      try {
+        const msg = {
+          to: req.body.email_address, // Change to your recipient
+          from: "tridetyencore@gmail.com", // Change to your verified sender
+          subject: "Chat Application Password Updated Sucessfully",
+          // text: `Hi, <br/> Your Password has been updated and that password is ${randomNumber}. <br/> So, now you will login to system with the updated password.`,
+          html: `Hi, <br/> Your Password has been updated and that password is <strong> ${randomNumber} </strong> <br/> So, now you will login to system with the updated password. <br/><br/> Thanks,<br/>Chat Application Team`,
+        };
+
+        sgMail.send(msg);
+        const salt = await bcrypt.genSalt(10);
+        randomNumber = await bcrypt.hash(randomNumber, salt);
+        console.log(randomNumber);
+        user = await ChatApplication.findOneAndUpdate(
+          { email_address: req.body.email_address },
+          { $set: { password: randomNumber } },
+          { new: true }
+        );
+        res.json(user);
+        console.log(user);
+      } catch (error) {
+        console.error(error.message);
         res.status(500).send("Server Error");
       }
     }

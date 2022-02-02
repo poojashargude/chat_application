@@ -14,6 +14,8 @@ import {
   MESSAGE_SEND_ERROR,
   ADMIN_REPLY_SUCCESS,
   ADMIN_REPLY_ERROR,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_ERROR,
   CLEAR_ERROR,
   CLEAR_INFO,
   LOGOUT,
@@ -32,6 +34,8 @@ const MessagesState = (props) => {
     admin_reply_success: null,
     admin_reply_error: null,
     admin_auth: null,
+    forgot_password_success: null,
+    forgot_password_error: null,
   };
   const [state, dispatch] = useReducer(messagesReducer, initialState);
 
@@ -54,6 +58,30 @@ const MessagesState = (props) => {
       console.log(err.response.data.error);
       dispatch({
         type: ADMIN_LOGIN_ERROR,
+        payload: err.response.data,
+      });
+    }
+  };
+
+  //forgot password
+  const forgotPassword = async (data) => {
+    console.log(data);
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post("/chat/forgotPassword", data, config);
+      console.log(res);
+      dispatch({
+        type: FORGOT_PASSWORD_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err.response.data.error);
+      dispatch({
+        type: FORGOT_PASSWORD_ERROR,
         payload: err.response.data,
       });
     }
@@ -184,12 +212,15 @@ const MessagesState = (props) => {
         message_send_error: state.message_send_error,
         admin_reply_success: state.admin_reply_success,
         admin_reply_error: state.admin_reply_error,
+        forgot_password_success: state.forgot_password_success,
+        forgot_password_error: state.forgot_password_error,
         admin_auth: state.admin_auth,
         adminLogin,
         getAdminMessages,
         getUserMessages,
         sendMessage,
         adminReply,
+        forgotPassword,
         clearError,
         clearInfo,
         logout,
